@@ -1,0 +1,50 @@
+2126. Destroying Asteroids
+
+You are given an integer mass, which represents the original mass of a planet. You are further given an integer array asteroids, where asteroids[i] is the mass of the ith asteroid.
+You can arrange for the planet to collide with the asteroids in any arbitrary order. If the mass of the planet is greater than or equal to the mass of the asteroid, the asteroid is destroyed and the planet gains the mass of the asteroid. Otherwise, the planet is destroyed.
+Return true if all asteroids can be destroyed. Otherwise, return false.
+
+CODE :- 
+
+import java.util.Arrays;
+
+class Solution {
+    public boolean asteroidsDestroyed(int mass, int[] asteroids) {
+        int len = asteroids.length;
+
+        // if(len==0 || (len==1 && mass <asteroids[0])){
+        //     return false;
+        // }
+        // if(len ==1 && asteroids[0]>mass){
+        //     return false;
+        // }
+
+        // int temp;
+        // for(int i=0;i<len-1;i++){
+        //     for(int j=0;j<len-i-1;j++){
+        //         if(asteroids[j]>asteroids[j+1]){
+        //             temp = asteroids[j];
+        //             asteroids[j] = asteroids[j+1];
+        //             asteroids[j+1] = temp;
+        //         }
+        //     }
+        // }
+        
+        Arrays.sort(asteroids);
+        // long mas= mass;
+
+        for(int i=0;i<len;i++){
+            
+            if(mass>100000){
+                return true;
+            }
+            else if(mass>=asteroids[i]){
+                mass = mass + asteroids[i];
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+    }
+}
