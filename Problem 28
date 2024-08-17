@@ -1,0 +1,25 @@
+258. Add Digits
+
+Given an integer num, repeatedly add all its digits until the result has only one digit, and return it.
+
+CODE : -
+
+class Solution {
+    public int addDigits(int num) {
+        int sum = 0, temp =num;
+        boolean flag = true;
+        while(flag){
+            if(temp==0){
+                temp = sum;
+                if(sum<10){
+                    return sum;
+                }
+                sum = 0;
+            }
+            sum = sum + temp%10;
+            temp = temp / 10;
+            
+        }
+        return sum;
+    }
+}
