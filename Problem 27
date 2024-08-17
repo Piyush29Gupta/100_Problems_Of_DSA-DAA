@@ -1,0 +1,33 @@
+2544. Alternating Digit Sum
+
+You are given a positive integer n. Each digit of n has a sign according to the following rules:
+
+The most significant digit is assigned a positive sign.
+Each other digit has an opposite sign to its adjacent digits.
+Return the sum of all digits with their corresponding sign.
+
+CODE : - 
+
+class Solution {
+    public int alternateDigitSum(int n) {
+        int sum = 0;
+        boolean add = true;
+        ArrayList <Integer> arr = new ArrayList<Integer>();
+        while(n>0){
+            arr.add(n%10);
+            n = n/10;
+        }
+        for(int i=arr.size()-1;i>=0;i--){
+            if(add){
+                add = false;
+                sum = sum + arr.get(i);
+            }
+            else{
+                add = true;
+                sum = sum - arr.get(i);
+            }
+        }
+        
+        return sum;
+    }
+}
