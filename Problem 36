@@ -1,0 +1,57 @@
+34. Find First and Last Position of Element in Sorted Array
+
+Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+You must write an algorithm with O(log n) runtime complexity.
+
+CODE : -
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int s =0, e = nums.length-1;
+        int[] arr = new int[2];
+        int first = -1, second = -1;
+
+        while(s<=e){
+            int m = s + (e-s)/2;
+            if(nums[m] == target){
+
+                first = m;
+                e = m-1;
+
+            }
+            else if(nums[m]<target){
+                s = m +1;
+            }
+            else if(nums[m]>target){
+                e = m-1;
+            }
+        }
+
+        s =0;
+        e = nums.length-1;
+
+        while(s<=e){
+            int m = s + (e-s)/2;
+            if(nums[m] == target){
+
+                second = m;
+                s = m+1;
+
+            }
+            else if(nums[m]<target){
+                s = m +1;
+            }
+            else if(nums[m]>target){
+                e = m-1;
+            }
+        }
+
+        arr[0] = first;
+        arr[1] = second;
+
+        return arr;
+    }
+}
