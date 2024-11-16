@@ -1,0 +1,84 @@
+GFG QUESTION: - Histogram Max Rectangular Area
+
+You are given a histogram represented by an array hist[] of size n, where each element of the array denotes the height of the bars in the histogram. All bars have the same width of 1 unit.
+
+Your task is to find the largest rectangular area possible in the given histogram, where the rectangle can be formed using a number of contiguous bars.
+
+CODE : -
+
+class Solution {
+    // Function to find largest rectangular area possible in a given histogram.
+    public static long getMaxArea(long hist[]) {
+        
+        int length = hist.length;
+        
+        long[] answer = new long [length];
+        
+        long[] ns = new long[length];
+        
+        long[] ps = new long[length];
+        
+        Stack<Integer> stack = new Stack<>();
+        
+        //ns
+        for(int i = length -1; i>=0;i--){
+            
+            while(!stack.isEmpty() && hist[stack.peek()]>=hist[i]){
+                    
+                stack.pop();
+            }
+            
+            if(stack.isEmpty()){
+                ns[i] = length;
+            }
+            else{
+                ns[i] = stack.peek();
+            }
+            stack.push(i);
+            
+        }
+        
+        while(!stack.isEmpty()){
+            stack.pop();
+        }
+        
+        
+        //ps
+        for(int i = 0; i<length;i++){
+            while(!stack.isEmpty() && hist[stack.peek()]>=hist[i]){
+                stack.pop();
+                
+            }
+            
+            if(stack.isEmpty()){
+                ps[i] = -1;
+            }
+            else{
+                ps[i] = stack.peek();
+            }
+            
+            stack.push(i);
+            
+        }
+        
+        long[] width = new long[length];
+        
+        for(int i =0; i<length; i++){
+            width[i] = ns[i] - ps[i] -1;
+            hist[i] = hist[i] * width[i];
+        }
+        
+        long res = 0;
+        
+        for(int i = 0;i<length;i++){
+            int result = 0;
+            if(hist[i]>res){
+                res = hist[i];
+            }
+        }
+        
+        return res;
+        
+        
+    }
+}
