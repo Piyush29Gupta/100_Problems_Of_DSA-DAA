@@ -1,0 +1,41 @@
+Given a string s of length n, find all the possible non-empty subsequences of the string s in lexicographically-sorted order.
+
+CODE : -
+
+class Solution
+{
+    
+    public static void helper(String inp, String out, List<String> ans){
+        if(inp.length()==0 ){
+            if(out.length()!=0){
+                ans.add(out);
+            }
+            return;
+            
+        }
+
+        helper(inp.substring(1),out,ans); // not including the 1st char
+        out = out+inp.charAt(0);
+        helper(inp.substring(1),out,ans); // including 1st char
+    }
+    
+    public List<String> AllPossibleStrings(String s)
+    {
+        
+        // Code here
+        List<String> ans = new ArrayList<>();
+        
+        String out = "";
+        helper(s,out,ans);
+        
+        // ArrayList<String> result = new ArrayList<>();
+        
+        // for(int i =1; i<ans.size();i++){
+        //     result.add(ans.get(i));
+        // }
+        
+        Collections.sort(ans);
+        
+        return ans;
+    }
+}
