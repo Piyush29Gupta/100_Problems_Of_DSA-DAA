@@ -1,0 +1,32 @@
+709. To Lower Case
+
+Given a string s, return the string after replacing every uppercase letter with the same lowercase letter.
+
+class Solution {
+    public String toLowerCase(String s) {
+        int len = s.length();
+        // String result = "";
+
+        StringBuilder result = new StringBuilder();
+
+        for(int i=0; i<len; i++){
+        int ascii = s.charAt(i);
+
+        if(ascii<=90 && ascii>=65){
+            ascii = ascii + 32;
+            // result += (char) ascii;
+            result.append((char)ascii);
+        }
+        else{
+            // result += s.charAt(i);
+            result.append(s.charAt(i));
+        }
+
+        }
+
+        return result.toString();
+
+
+        
+    }
+}
