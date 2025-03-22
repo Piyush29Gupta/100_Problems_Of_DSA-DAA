@@ -1,0 +1,44 @@
+22. Generate Parentheses
+
+Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+
+CODE : -
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        int o = n;
+        int c = n;
+        // String ans = "";
+        ArrayList<String> result = new ArrayList<>();
+        helper(o,c,"",result);
+        return result;
+    }
+
+    public void helper(int o, int c,String ans,ArrayList<String> result){
+        
+        if(o==0 && c==0){
+            result.add(ans);
+            return;
+        }
+
+
+        
+
+        if(o==c){
+            helper(o-1,c,ans+'(',result);
+        }
+        else if(o==0 && c!=0){
+            helper(o, c-1, ans + ')',result);
+        }
+        else{
+            helper(o-1,c,ans + '(',result);
+            helper(o,c-1,ans + ')',result);
+
+        }
+        // return ans;
+    }    
+
+}   
+        
+
+    
+
