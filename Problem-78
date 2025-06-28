@@ -1,0 +1,36 @@
+1768. Merge Strings Alternately
+
+You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string.
+Return the merged string.
+
+CODE : -
+
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+
+    int len1 = word1.length(), len2 = word2.length();
+    int n1=0,n2=0;
+    // String result ="";
+    StringBuilder result = new StringBuilder();
+    while(n1<len1 || n2<len2 ){
+
+        if(n1<len1){
+            // result = result + word1.charAt(n1);
+            result.append( word1.charAt(n1));
+            n1++;
+        }
+        if(n2<len2){
+            // result = result + word2.charAt(n2);
+            result.append( word2.charAt(n2));
+            n2++;
+        }
+
+    }
+
+    return result.toString();
+
+    }
+}
+
+// append method of stringbuilder take less time to + operator of string
+
