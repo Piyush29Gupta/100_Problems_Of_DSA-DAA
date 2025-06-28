@@ -1,0 +1,44 @@
+905. Sort Array By Parity
+ 
+Given an integer array nums, move all the even integers at the beginning of the array followed by all the odd integers.
+Return any array that satisfies this condition.
+
+CODE : -
+
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+
+        int even=0;
+
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]%2==0){
+                int temp = nums[i];
+                nums[i] = nums[even];
+                nums[even] = temp;
+                even++;
+            }
+        }
+
+        return nums;
+    }
+}
+
+
+/*
+solution -2
+int arr[] = new int[nums.length];
+        int left =0, right = nums.length-1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]%2==0){
+                arr[left] =nums[i];
+                left++;
+            }
+            else{
+                arr[right] = nums[i];
+                right--;
+            }
+        }
+
+        return arr;
+
+*/
