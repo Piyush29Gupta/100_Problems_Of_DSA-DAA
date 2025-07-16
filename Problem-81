@@ -1,0 +1,39 @@
+3110. Score of a String
+ 
+You are given a string s. The score of a string is defined as the sum of the absolute difference between the ASCII values of adjacent characters.
+Return the score of s.
+ 
+CODE:-
+
+class Solution {
+   
+    public static int helper(String s, int i, int len){
+        if(i+1==len){
+            return 0;
+        }
+        return Math.abs(s.charAt(i)-s.charAt(i+1)) + helper(s,i+1,len);
+    }
+
+    public int scoreOfString(String s) {
+        return helper(s,0,s.length());
+    }
+}
+
+
+/* solution 2
+int result =0;
+        // int x1 =0, x2=0;
+
+        for(int i=0;i<s.length()-1;i++){
+           
+            // x1 = (int)s.charAt(i);
+            // x2 = (int)s.charAt(i+1);
+
+            // int diff = Math.abs(x2-x1);
+
+            result = result + Math.abs(s.charAt(i)-s.charAt(i+1));
+
+        }
+        return result;
+
+*/
