@@ -1,0 +1,40 @@
+498. Diagonal Traverse
+
+Given an m x n matrix mat, return an array of all the elements of the array in a diagonal order.
+
+CODE : -
+
+class Solution {
+    public int[] findDiagonalOrder(int[][] mat) {
+        int row = mat.length;
+        int col = mat[0].length;
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+
+        for(int i = 0; i<row;i++){
+            for(int j =0; j<col; j++){
+                map.computeIfAbsent(i+j, k->new ArrayList<>()).add(mat[i][j]);
+            }
+        }
+
+        boolean flip = true;
+        List<Integer> result_List = new ArrayList<>();
+
+        for(Map.Entry<Integer, List<Integer>> entry :map.entrySet()){
+            List<Integer> curr_diagonal = entry.getValue();
+            if(flip){
+                Collections.reverse(curr_diagonal);
+            }
+            flip = !flip;
+            result_List.addAll(curr_diagonal);
+        }
+
+        int[] result = new int[result_List.size()];
+
+        for(int i = 0; i<result_List.size();i++){
+            result[i] = result_List.get(i);
+        }
+
+        return result;
+    }
+}
