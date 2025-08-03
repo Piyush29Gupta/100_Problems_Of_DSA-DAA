@@ -1,0 +1,64 @@
+1329. Sort the Matrix Diagonally
+
+A matrix diagonal is a diagonal line of cells starting from some cell in either the topmost row or leftmost column and going in the bottom-right direction until reaching the matrix's end. For example, the matrix diagonal starting from mat[2][0], where mat is a 6 x 3 matrix, includes cells mat[2][0], mat[3][1], and mat[4][2].
+
+Given an m x n matrix mat of integers, sort each matrix diagonal in ascending order and return the resulting matrix.
+
+CODE : -
+
+class Solution {
+    public int[][] diagonalSort(int[][] mat) {
+
+        // Using HashMap to store diagonal elements.
+        // The key (i-j) represents the diagonal identifier.
+        // The value is an ArrayList to store elements of that diagonal.
+
+        int row = mat.length;
+        int col = mat[0].length;
+
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        
+        // Store diagonal elements
+        // Iterate through the matrix and add elements to their respective diagonal lists
+        
+        for(int i =0; i<row; i++){
+            for(int j =0; j<col; j++){
+                
+                // If the key (i-j) does not exist, a new ArrayList is created and put into the map.
+                // Then, the current matrix element mat[i][j] is added to that list.
+                // If the key exists, the existing list is retrieved, and mat[i][j] is added to it.
+                
+                map.computeIfAbsent(i-j, k-> new ArrayList<>()).add(mat[i][j]);
+        
+            }
+        }
+
+        // Sort each diagonal's elements
+        // Iterate through all the lists (values) in the HashMap and sort them.
+        for(Map.Entry<Integer, List<Integer>> entry : map.entrySet()){
+            Collections.sort(entry.getValue());
+        }
+
+
+        // Put the sorted elements back into the matrix
+        // We iterate from bottom-right to top-left to easily use pop_back() equivalent.
+        // By iterating backwards, we ensure that when we retrieve `mp[i-j].get(0)`
+        // and remove it, we are processing the smallest elements first for that diagonal,
+        // effectively simulating `back()` and `pop_back()` from a sorted list if we were to iterate forward
+        // and remove from the front. However, to match the C++ pop_back logic which consumes from the end,
+        // we iterate backwards and consume from the end of the *sorted* list.
+
+        for(int i = row-1; i>=0;i--){
+            for(int j = col-1; j>=0; j--){
+                // Get the list for the current diagonal (i-j)
+                List<Integer> curr_diagonal = map.get(i-j);
+
+                mat[i][j] = curr_diagonal.remove(curr_diagonal.size()-1);
+            }
+        }
+
+        return mat;
+
+        
+    }
+}
